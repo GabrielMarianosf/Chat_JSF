@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Home | Jump of The Ch@t</title>
+        <link rel="icon" href="img/icone.png"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </h:head>
+    <h:body>
+        <h:form id="login">
+            <body background="img/background.jpg"></body>
+            <div bgcolor="black" width="1800px" align="center" style="background:black;color:white;">
+                <img src="img/icone.png" size="50"></img>
+                <img src="img/divisor.png" width="550px"></img>
+                <span class="badge badge-secondary">Já possui uma conta?</span>
+                <img src="img/divisor.png" width="10px"></img>
+                Email:
+                <h:inputText id="emaillogin" class="btn btn-light" value=""></h:inputText>
+                <img src="img/divisor.png" width="5px"></img>
+                Senha:
+                <h:inputSecret id="senhalogin" class="btn btn-light" value=""></h:inputSecret>
+                <img src="img/divisor.png" width="5px"></img>
+                <h:commandButton id="login" value="Entrar" class="btn btn-secondary" action="#{ChatBean.c}"></h:commandButton>
+            </div>
+        </h:form>
+        <h:form id="cadastro">
+            <center>
+                <br></br>
+                <img src="img/logo_index.png"></img>
+                <br></br>
+                <br></br>
+                <h3>Crie uma Conta!</h3>
+                É gratuito e sempre será... talvez.
+                <br></br>
+                <br></br>
+                Nome: <h:inputText id="nome" class="btn btn-outline-secondary" value="#{chatBean.usuario.nome}"></h:inputText>
+                Sobrenome: <h:inputText id="sobrenome" class="btn btn-outline-secondary" value="#{chatBean.usuario.sobrenome}"></h:inputText>
+                <br></br>
+                <br></br>
+                Senha: <h:inputSecret id="senha" class="btn btn-outline-secondary" value="#{chatBean.usuario.senha}"></h:inputSecret>
+                Apelido: <h:inputText id="apelido" class="btn btn-outline-secondary" value="#{chatBean.usuario.apelido}"></h:inputText>
+                <br></br>
+                <br></br>
+                Email: <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}"></h:inputText>
+                <br></br>
+                <br></br>
+                <h:commandButton id="cadastra" type="submit" value="Pronto!" styleClass="btn btn-dark" action="#{chatBean.cadastrar()}"></h:commandButton>
+                <img src="img/divisor2.png" width="8px"></img>
+                <h:commandButton id="limpar" type="reset" value="Limpar" class="btn btn-dark"></h:commandButton>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+
