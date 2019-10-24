@@ -13,6 +13,7 @@ public class Mensagem {
     
     private String mensagem;
     private Integer codigo;
+    private String remetente;
 
     public String getMensagem() {
         return mensagem;
@@ -20,6 +21,22 @@ public class Mensagem {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getRemetente() {
+        return remetente;
+    }
+
+    public void setRemetente(String remetente) {
+        this.remetente = remetente;
     }
     
     @Override

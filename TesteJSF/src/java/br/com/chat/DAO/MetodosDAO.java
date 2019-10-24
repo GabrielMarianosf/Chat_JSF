@@ -22,14 +22,14 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 public class MetodosDAO {
-    
+
     public void inserir(Usuario Usuario) throws ClassNotFoundException, SQLException {
-        
+
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
             pst = conexao.prepareCall("INSERT INTO usuarios (id,Nome,Sobrenome,Senha,Apelido,email)"
-                    + "values (null,?,?,?,?,?)"); 
+                    + "values (null,?,?,?,?,?)");
             pst.setString(1, Usuario.getNome());
             pst.setString(2, Usuario.getSobrenome());
             pst.setString(3, Usuario.getSenha());
@@ -41,9 +41,9 @@ public class MetodosDAO {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void inserirMensagem (Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
-        
+
+    public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
+
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
@@ -51,34 +51,72 @@ public class MetodosDAO {
                     + "values (null,?,?)");
             pst.setString(1, mensagem.getMensagem());
             pst.setString(2, Usuario.getApelido());
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
     }
 
-    public List<Usuario> listarUsuario () throws ClassNotFoundException  {
+    public List<Usuario> listarUsuario(Usuario Usuario) throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst = conexao.prepareCall("SELECT * FROM usuarios");
             ResultSet rs = pst.executeQuery();
             List<Usuario> lista = new ArrayList<>();
-            while(rs.next()){
-            Usuario user = new Usuario();
-            user.setNome(rs.getString("nome"));
-            user.setSobrenome(rs.getString("sobrenome"));
-            user.setEmail(rs.getString("email"));
-            user.setSenha(rs.getString("senha"));
-            user.setApelido(rs.getString("apelido"));
-            lista.add(user);
-            }
+            Usuario usuario = new Usuario();
+            usuario.setNome(rs.getString("nome"));
+            usuario.setSobrenome(rs.getString("sobrenome"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setApelido(rs.getString("apelido"));
+            lista.add(usuario);
             return lista;
-        }            
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public List<Mensagem> listarMensagens(Mensagem mensagem) throws ClassNotFoundException, SQLException {
+
+        try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst = conexao.prepareCall("SELECT * FROM mensagens");
+            ResultSet rs = pst.executeQuery();
+            List<Mensagem> lista = new ArrayList<>();
+            mensagem.setMensagem(rs.getString("mensagem"));
+            mensagem.setRemetente(rs.getString("remetente"));
+            lista.add(mensagem);
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void deletarUsuario(Usuario Usuario) throws ClassNotFoundException, SQLException {
+
+        try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;
+            pst = conexao.prepareCall("DELETE FROM patrimonio WHERE codigo=?;");
+            pst.setInt(1, Usuario.getCodigo());
+            pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void atualizarUsuario(Usuario Usuario) throws ClassNotFoundException, SQLException {
+        try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;
+            pst = conexao.prepareCall("UPDATE patrimonio set nome=?, sobrenome=?, email=?, apelido=? senha=? "
+                    + "where codigo=?");
+            pst.setInt(6, Usuario.getCodigo());
+        } catch (SQLException ex) {
+            Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
