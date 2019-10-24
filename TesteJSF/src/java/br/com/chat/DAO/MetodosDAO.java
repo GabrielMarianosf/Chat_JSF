@@ -58,20 +58,22 @@ public class MetodosDAO {
         }
     }
 
-    public List<Usuario> listarUsuario (Usuario Usuario) throws ClassNotFoundException, SQLException {
+    public List<Usuario> listarUsuario () throws ClassNotFoundException  {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst = conexao.prepareCall("SELECT * FROM usuarios");
             ResultSet rs = pst.executeQuery();
             List<Usuario> lista = new ArrayList<>();
-            Usuario usuario = new Usuario();
-            usuario.setNome(rs.getString("nome"));
-            usuario.setSobrenome(rs.getString("sobrenome"));
-            usuario.setEmail(rs.getString("email"));
-            usuario.setSenha(rs.getString("senha"));
-            usuario.setApelido(rs.getString("apelido"));
-            lista.add(usuario);
+            while(rs.next()){
+            Usuario user = new Usuario();
+            user.setNome(rs.getString("nome"));
+            user.setSobrenome(rs.getString("sobrenome"));
+            user.setEmail(rs.getString("email"));
+            user.setSenha(rs.getString("senha"));
+            user.setApelido(rs.getString("apelido"));
+            lista.add(user);
+            }
             return lista;
         }            
         catch (SQLException ex) {

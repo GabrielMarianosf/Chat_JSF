@@ -24,15 +24,20 @@
             <img src="img/temp.jpg" class="btn btn-outline-dark" height="250px" width="250px"></img>
                 <br></br>
                 <br></br>
-                <h:outputLabel>Nome</h:outputLabel>
+
+                <h:outputLabel>Nome: </h:outputLabel> 
+                <h:outputLabel>#{chatBean.usuario.nome}</h:outputLabel>
+                    
+                <br/>
                 <img src="img/divisor2.png" width="2px"></img>
-                <h:outputLabel>Sobrenome</h:outputLabel>
+                <h:outputLabel>Sobrenome: </h:outputLabel>
                 <br></br>
-            <h:outputLabel>Usuário</h:outputLabel>
+            <h:outputLabel>Usuário: </h:outputLabel>
             <br></br>
-            <h:outputLabel>Email</h:outputLabel>
+            <h:outputLabel>Email: </h:outputLabel>
             <br></br>
             <br></br>
+                
             <a href="alterar.xhtml" class="btn btn-secondary">Editar Perfil</a>
             <img src="img/divisor2.png" width="2px"></img>
             <h:commandButton type="button" value="Excluir Perfil" class="btn btn-danger"></h:commandButton>

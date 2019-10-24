@@ -10,6 +10,8 @@ import br.com.chat.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -23,15 +25,22 @@ import javax.faces.bean.SessionScoped;
 public class ChatBean {
     
     private Usuario usuario = new Usuario();//objeto que herda os metodos get e set da classe Mensagem
-    private MetodosDAO msg_dao = new MetodosDAO();//objeto que herda os metodos inserir deletar e listar e excluir da 
+    private MetodosDAO mtd_dao = new MetodosDAO();//objeto que herda os metodos inserir deletar e listar e excluir da 
     //da classe MensagemDAO
     
-    private List<Usuario> listamsg = new ArrayList<>();
+    private List<Usuario> lista = new ArrayList<>();
     public void cadastrar() throws ClassNotFoundException, SQLException {
         // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
         // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
         new MetodosDAO().inserir(usuario);
         usuario = new Usuario();
+    }
+    public void listar() throws ClassCastException, SQLException {
+        try {
+            lista = mtd_dao.listarUsuario();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
     
     
@@ -44,20 +53,20 @@ public class ChatBean {
         this.usuario = usuario;
     }
 
-    public MetodosDAO getMsg_dao() {
-        return msg_dao;
+    public MetodosDAO getMtd_dao() {
+        return mtd_dao;
     }
 
-    public void setMsg_dao(MetodosDAO msg_dao) {
-        this.msg_dao = msg_dao;
+    public void setMsg_dao(MetodosDAO mtd_dao) {
+        this.mtd_dao = mtd_dao;
     }
 
-    public List<Usuario> getListamsg() {
-        return listamsg;
+    public List<Usuario> getLista() {
+        return lista;
     }
 
-    public void setListamsg(List<Usuario> listamsg) {
-        this.listamsg = listamsg;
+    public void setLista(List<Usuario> listamsg) {
+        this.lista = listamsg;
     }
     
     
