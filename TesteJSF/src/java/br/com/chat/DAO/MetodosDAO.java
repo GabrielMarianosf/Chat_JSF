@@ -64,6 +64,7 @@ public class MetodosDAO {
             PreparedStatement pst = conexao.prepareCall("SELECT * FROM usuarios");
             ResultSet rs = pst.executeQuery();
             List<Usuario> lista = new ArrayList<>();
+            while (rs.next()) {
             Usuario usuario = new Usuario();
             usuario.setNome(rs.getString("nome"));
             usuario.setSobrenome(rs.getString("sobrenome"));
@@ -71,6 +72,7 @@ public class MetodosDAO {
             usuario.setSenha(rs.getString("senha"));
             usuario.setApelido(rs.getString("apelido"));
             lista.add(usuario);
+            }
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,13 +84,15 @@ public class MetodosDAO {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
-            PreparedStatement pst = conexao.prepareCall("SELECT * FROM mensagens");
+            PreparedStatement pst = conexao.prepareCall("SELECT * FROM mensagem");
             ResultSet rs = pst.executeQuery();
             List<Mensagem> lista = new ArrayList<>();
+            while (rs.next()) {
             mensagem.setMensagem(rs.getString("mensagem"));
             mensagem.setRemetente(rs.getString("remetente"));
             lista.add(mensagem);
             return lista;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
