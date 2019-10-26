@@ -24,3 +24,12 @@ form {
     }
 }
 
+#caixa  {
+    width: 1050px;
+    height: 480px;
+    border-width: 1.3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 50px;
+    display: inline-block
+}

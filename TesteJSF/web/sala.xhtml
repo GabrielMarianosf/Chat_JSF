@@ -5,18 +5,30 @@
     <h:head>
         <title>Sala de Chat | Jump of The Ch@t</title>
         <link rel="icon" href="img/icone.png"></link>
+        <link rel="stylesheet" type="text/css" href="CSS/stilo.css"></link>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
         <h:form id="sala">
             <body background="img/background.jpg"></body>
-            <div bgcolor="black" width="1800px" align="center" style="background:black;color:white;">
+            <div bgcolor="black" width="1000px" align="center" height="10px" style="background:black;color:white;">
                 <img src="img/icone.png" size="50"></img>
-                <img src="img/divisor.png" width="550px"></img>
-                <img src="img/divisor.png" width="5px"></img>
+                <img src="img/divisor.png" width="700px"></img>
                 <h:commandButton id="sair" value="Sair" class="btn btn-secondary" action="a"></h:commandButton>
             </div>
+            <br></br>
+        </h:form>
+        <h:form id="mensagens">
+            <center>
+                <div id="caixa"></div>
+                <center>
+                <img src="img/divisor3.png" height="1px" width="100px"></img>
+                </center>
+                <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value=""></h:inputText>
+                <img src="img/divisor3.png" width="2px"></img>
+                <h:commandButton id="enviar" value="Enviar" class="btn btn-dark" action="a"></h:commandButton>
+            </center>
         </h:form>
     </h:body>
 </html>
