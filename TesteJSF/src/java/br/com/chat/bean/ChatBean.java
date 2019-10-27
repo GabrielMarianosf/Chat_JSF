@@ -37,7 +37,7 @@ public class ChatBean {
     }
     public void listar() throws ClassCastException, SQLException {
         try {
-            lista = mtd_dao.listarUsuario();
+            lista = mtd_dao.listarUsuario(usuario);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
