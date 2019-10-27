@@ -33,3 +33,7 @@ form {
     border-radius: 50px;
     display: inline-block
 }
+
+body {
+    background-image: url("../..//..//img/background.jpg");
+}
