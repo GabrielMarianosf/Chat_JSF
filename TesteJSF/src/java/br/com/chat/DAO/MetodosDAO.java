@@ -61,6 +61,26 @@ public class MetodosDAO {
             return false;
         }       
     }
+    
+    public boolean validarEmail (Usuario user) throws SQLException, ClassNotFoundException{
+            try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;
+            boolean result;
+            pst = conexao.prepareCall("select email from usuarios where email=?");
+            pst.setString(1, user.getEmail());
+            result = pst.execute();
+            Conexao.fecharConexao();
+            if(result == false){
+                return true;
+            }
+            else{
+                return false;
+            }                
+        } catch (Exception e) {
+            return false;
+        }       
+    }
 
     public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
 

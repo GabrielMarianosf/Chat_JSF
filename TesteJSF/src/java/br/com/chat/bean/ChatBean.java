@@ -33,14 +33,18 @@ public class ChatBean {
         // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
         // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
         boolean res;
+        boolean ress;
+        ress = new MetodosDAO().validarEmail(usuario);
         res = new MetodosDAO().validarApelido(usuario);
-        if(res == true){
-        new MetodosDAO().inserir(usuario);
-        usuario = new Usuario();
+        
+        if(ress && res == true){
+            
+            new MetodosDAO().inserir(usuario);
+        
         }
         else{
-            System.out.println("Apelido ja existe !");     
-    }
+            System.out.println("Apelido ou Email ja existe !");     
+        }
     }
     public void listar() throws ClassCastException, SQLException {
         try {
