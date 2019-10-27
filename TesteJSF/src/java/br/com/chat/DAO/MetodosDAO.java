@@ -42,45 +42,64 @@ public class MetodosDAO {
         }
     }
     
-    public boolean validarApelido (Usuario user) throws SQLException, ClassNotFoundException{
+    public Integer validarApelido (Usuario user) throws SQLException, ClassNotFoundException{
             try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            boolean result;
+            
             pst = conexao.prepareCall("select apelido from usuarios where apelido=?");
             pst.setString(1, user.getApelido());
-            result = pst.execute();
+            ResultSet r = pst.executeQuery();
             Conexao.fecharConexao();
-            if(result == false){
-                return true;
+            if(r.next()){
+                return 1;
             }
             else{
-                return false;
-            }                
-        } catch (Exception e) {
-            return false;
+                return 0;
+            }
+        } catch (ClassNotFoundException | SQLException exception) {
+            return 0;
         }       
     }
     
-    public boolean validarEmail (Usuario user) throws SQLException, ClassNotFoundException{
+    public Integer validarEmail (Usuario user) throws SQLException, ClassNotFoundException{
             try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            boolean result;
+            
             pst = conexao.prepareCall("select email from usuarios where email=?");
             pst.setString(1, user.getEmail());
-            result = pst.execute();
+            ResultSet rs = pst.executeQuery();
             Conexao.fecharConexao();
-            if(result == false){
-                return true;
+            if(rs == null){
+                return 1;
             }
-            else{
-                return false;
-            }                
-        } catch (Exception e) {
-            return false;
+            return 0;               
+        } catch (ClassNotFoundException | SQLException e) {
+            return 0;
         }       
     }
+    
+    public boolean Logar (Usuario user) throws SQLException, ClassNotFoundException{
+            try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;            
+            pst = conexao.prepareCall("select email,senha from usuarios where email=? and senha = ?");
+            pst.setString(1, user.getEmail());
+            pst.setString(2, user.getSenha());
+            ResultSet rs = pst.executeQuery();
+            Conexao.fecharConexao();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                return false;
+            }            
+            }catch (SQLException e) {
+                System.out.println("erro login");
+                return false;
+            }
+  }
 
     public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
 

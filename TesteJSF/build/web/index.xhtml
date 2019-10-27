@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Home | Jump of The Ch@t</title>
         <link rel="icon" href="img/icone.png"></link>
@@ -9,20 +10,23 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </h:head>
     <h:body>        
-            <body background="img/background.jpg"></body>
+        <h:outputStylesheet library="default" name="CSS/stilo.css"/>
             <div bgcolor="black" width="100%" align="center" style="background:black;color:white;">
+                
                 <h:form id="login">
                 <img src="img/icone.png" size="50"></img>
                 <img src="img/divisor.png" width="550px"></img>
                 <span class="badge badge-secondary">Já possui uma conta?</span>
                 <img src="img/divisor.png" width="10px"></img>
                 Email:
-                <h:inputText id="emaillogin" class="btn btn-light" value=""></h:inputText>
+                <h:inputText id="emaillogin" class="btn btn-light" value="#{chatBean.lg.email}"></h:inputText>
                 <img src="img/divisor.png" width="5px"></img>
                 Senha:
-                <h:inputSecret id="senhalogin" class="btn btn-light" value=""></h:inputSecret>
+                <h:inputSecret id="senhalogin" class="btn btn-light" value="#{chatBean.lg.senha}"></h:inputSecret>
                 <img src="img/divisor.png" width="5px"></img>
-                <h:commandButton id="login" value="Entrar" class="btn btn-secondary" action="#{ChatBean.c}"></h:commandButton>
+                <h:commandButton id="login" value="Entrar" class="btn btn-secondary" action="#{chatBean.validarLogar()}">
+                     
+                </h:commandButton>
                 </h:form>
             </div>        
             <div class="form-wrapper">
@@ -47,12 +51,16 @@
                 Email: <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}"></h:inputText>
                 <br></br>
                 <br></br>
-                <h:commandButton id="cadastra" type="submit" value="Pronto!" styleClass="btn btn-dark" action="#{chatBean.cadastrar()}"></h:commandButton>
+                <h:commandButton id="cadastra" type="submit" value="Pronto!" styleClass="btn btn-dark" action="#{chatBean.cadastrar()}">
+                    
+                </h:commandButton>
                 <img src="img/divisor2.png" width="8px"></img>
                 <h:commandButton id="limpar" type="reset" value="Limpar" class="btn btn-dark"></h:commandButton>
+                
             </center>
         </h:form>
         </div>
+        <h:outputScript name="jsf.js" library="javax.faces"/>
     </h:body>
 </html>
 

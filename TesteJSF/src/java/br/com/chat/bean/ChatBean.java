@@ -6,6 +6,7 @@
 package br.com.chat.bean;
 
 import br.com.chat.DAO.MetodosDAO;
+import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 
 /**
  *
@@ -27,31 +30,57 @@ public class ChatBean {
     private Usuario usuario = new Usuario();//objeto que herda os metodos get e set da classe Mensagem
     private MetodosDAO mtd_dao = new MetodosDAO();//objeto que herda os metodos inserir deletar e listar e excluir da 
     //da classe MensagemDAO
+    private Login lg = new Login();
     
     private List<Usuario> lista = new ArrayList<>();
+    
     public void cadastrar() throws ClassNotFoundException, SQLException {
         // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
         // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
-        boolean res;
-        boolean ress;
+        Integer res;
+        Integer ress;
         ress = new MetodosDAO().validarEmail(usuario);
         res = new MetodosDAO().validarApelido(usuario);
         
-        if(ress && res == true){
+        if(res == 1){
             
             new MetodosDAO().inserir(usuario);
         
         }
         else{
-            System.out.println("Apelido ou Email ja existe !");     
+            System.out.println("erro");
         }
     }
+    
     public void listar() throws ClassCastException, SQLException {
         try {
             lista = mtd_dao.listarUsuario(usuario);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+    
+    public void validarLogar() throws ClassNotFoundException, SQLException {
+        try {
+            boolean r;
+            r = mtd_dao.Logar(usuario);
+            if(r == true ){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+            }
+            else {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            }
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+    }
+
+    public Login getLg() {
+        return lg;
+    }
+
+    public void setLg(Login lg) {
+        this.lg = lg;
     }
     
     
