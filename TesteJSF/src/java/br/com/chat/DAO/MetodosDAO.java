@@ -23,23 +23,43 @@ import java.util.logging.Logger;
  */
 public class MetodosDAO {
 
-    public void inserir(Usuario Usuario) throws ClassNotFoundException, SQLException {
+    public void inserir(Usuario usuario) throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
             pst = conexao.prepareCall("INSERT INTO usuarios (id,Nome,Sobrenome,Senha,Apelido,email)"
                     + "values (null,?,?,?,?,?)");
-            pst.setString(1, Usuario.getNome());
-            pst.setString(2, Usuario.getSobrenome());
-            pst.setString(3, Usuario.getSenha());
-            pst.setString(4, Usuario.getApelido());
-            pst.setString(5, Usuario.getEmail());
+            pst.setString(1, usuario.getNome());
+            pst.setString(2, usuario.getSobrenome());
+            pst.setString(3, usuario.getSenha());
+            pst.setString(4, usuario.getApelido());
+            pst.setString(5, usuario.getEmail());
             pst.execute();
             Conexao.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public boolean validarApelido (Usuario user) throws SQLException, ClassNotFoundException{
+            try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;
+            boolean result;
+            pst = conexao.prepareCall("select apelido from usuarios where apelido=?");
+            pst.setString(1, user.getApelido());
+            result = pst.execute();
+            Conexao.fecharConexao();
+            if(result == false){
+                return true;
+            }
+            else{
+                return false;
+            }                
+        } catch (Exception e) {
+            return false;
+        }       
     }
 
     public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {

@@ -32,8 +32,15 @@ public class ChatBean {
     public void cadastrar() throws ClassNotFoundException, SQLException {
         // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
         // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
+        boolean res;
+        res = new MetodosDAO().validarApelido(usuario);
+        if(res == true){
         new MetodosDAO().inserir(usuario);
         usuario = new Usuario();
+        }
+        else{
+            System.out.println("Apelido ja existe !");     
+    }
     }
     public void listar() throws ClassCastException, SQLException {
         try {
