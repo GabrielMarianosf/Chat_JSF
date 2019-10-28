@@ -65,9 +65,10 @@ public class ChatBean {
             FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
             }
             else {
-                FacesContext.getCurrentInstance().addMessage
-        (null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuario ou senha incorretos","Tente novamente!!"));
-                FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login ou Senha inválidos !","erro de login");
+                context.addMessage(null, message);
+                context.validationFailed();
             }
         } catch (Exception e) {
             System.out.println("erro");
