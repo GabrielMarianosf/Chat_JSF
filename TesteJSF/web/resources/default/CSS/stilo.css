@@ -25,12 +25,12 @@ form {
 }
 
 #caixa  {
-    width: 1050px;
+    width: 925px;
     height: 480px;
     border-width: 1.3px;
     border-color: black;
     border-style: solid;
-    border-radius: 50px;
+    border-radius: 10px;
     display: inline-block
 }
 
