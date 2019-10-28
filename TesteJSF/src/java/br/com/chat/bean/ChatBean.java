@@ -8,11 +8,13 @@ package br.com.chat.bean;
 import br.com.chat.DAO.MetodosDAO;
 import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Usuario;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -34,22 +36,17 @@ public class ChatBean {
     
     private List<Usuario> lista = new ArrayList<>();
     
-    public void cadastrar() throws ClassNotFoundException, SQLException {
+    public void cadastrar() throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
         // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
         // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
         Integer res;
         Integer ress;
         ress = new MetodosDAO().validarEmail(usuario);
         res = new MetodosDAO().validarApelido(usuario);
+
+        new MetodosDAO().inserir(usuario);
         
-        if(res == 1){
-            
-            new MetodosDAO().inserir(usuario);
-        
-        }
-        else{
-            System.out.println("erro");
-        }
+
     }
     
     public void listar() throws ClassCastException, SQLException {
@@ -60,14 +57,16 @@ public class ChatBean {
         }        
     }
     
-    public void validarLogar() throws ClassNotFoundException, SQLException {
+    public void validarLogar() throws ClassNotFoundException, SQLException, Exception {
         try {
             boolean r;
-            r = mtd_dao.Logar(usuario);
-            if(r == true ){
+            r = mtd_dao.Logar(lg);
+            if(r){
             FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
             }
             else {
+                FacesContext.getCurrentInstance().addMessage
+        (null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuario ou senha incorretos","Tente novamente!!"));
                 FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             }
         } catch (Exception e) {

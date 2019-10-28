@@ -5,9 +5,12 @@
  */
 package br.com.chat.DAO;
 
+import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Mensagem;
 import br.com.chat.entidade.Usuario;
 import br.com.chat.util.Conexao;
+import br.com.chat.util.Hash;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,13 +20,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /**
  *
  * @author Gabriel
  */
 public class MetodosDAO {
 
-    public void inserir(Usuario usuario) throws ClassNotFoundException, SQLException {
+    public void inserir(Usuario usuario) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
@@ -32,7 +37,9 @@ public class MetodosDAO {
                     + "values (null,?,?,?,?,?)");
             pst.setString(1, usuario.getNome());
             pst.setString(2, usuario.getSobrenome());
-            pst.setString(3, usuario.getSenha());
+            String res;
+            res = Hash.EncriptarSHA(usuario.getSenha());
+            pst.setString(3, res);            
             pst.setString(4, usuario.getApelido());
             pst.setString(5, usuario.getEmail());
             pst.execute();
@@ -80,25 +87,25 @@ public class MetodosDAO {
         }       
     }
     
-    public boolean Logar (Usuario user) throws SQLException, ClassNotFoundException{
-            try {
+    public boolean Logar (Login log) throws Exception{
+            try {            
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;            
-            pst = conexao.prepareCall("select email,senha from usuarios where email=? and senha = ?");
-            pst.setString(1, user.getEmail());
-            pst.setString(2, user.getSenha());
+            pst = conexao.prepareCall("select COUNT(*) AS res from usuarios where email = ? and senha = ?");
+            pst.setString(1, log.getEmail());
+            String res;
+            res = Hash.EncriptarSHA(log.getSenha());
+            pst.setString(2, res);
             ResultSet rs = pst.executeQuery();
-            Conexao.fecharConexao();
-            if(rs.next()){
-                return true;
-            }
-            else {
-                return false;
-            }            
-            }catch (SQLException e) {
+            while (rs.next()) {
+                return rs.getBoolean("res");
+            }                       
+            }catch (ClassNotFoundException | NoSuchAlgorithmException | SQLException e) {
                 System.out.println("erro login");
-                return false;
+            }finally {
+                Conexao.fecharConexao();
             }
+            return false;
   }
 
     public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
