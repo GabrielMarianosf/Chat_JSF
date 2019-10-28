@@ -8,6 +8,7 @@ package br.com.chat.bean;
 import br.com.chat.DAO.MetodosDAO;
 import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Usuario;
+import com.sun.xml.ws.client.RequestContext;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
 
 
 /**
@@ -65,8 +67,8 @@ public class ChatBean {
             FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
             }
             else {
-                FacesContext context = FacesContext.getCurrentInstance();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login ou Senha inválidos !","erro de login");
+                FacesContext context = FacesContext.getCurrentInstance();                
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Login ou Senha inválidos !","erro de login");
                 context.addMessage(null, message);
                 context.validationFailed();
             }
