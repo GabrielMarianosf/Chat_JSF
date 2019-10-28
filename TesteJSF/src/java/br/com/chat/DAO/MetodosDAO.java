@@ -115,6 +115,8 @@ public class MetodosDAO {
                     + "values (null,?,?)");
             pst.setString(1, msg.getMensagem());
             pst.setString(2, Usuario.getApelido());
+            pst.execute();
+            Conexao.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
 
