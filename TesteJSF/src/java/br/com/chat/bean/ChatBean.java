@@ -126,4 +126,12 @@ public class ChatBean {
         this.lista = listamsg;
     }
     
+    public List<Mensagem> getListam() {
+        return listam;
+    }
+
+    public void setListam(List<Mensagem> listamsg) {
+        this.listam = listamsg;
+    }
+    
 }
