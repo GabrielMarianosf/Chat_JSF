@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /**
  *
  * @author Gabriel
@@ -108,14 +106,14 @@ public class MetodosDAO {
             return false;
   }
 
-    public void inserirMensagem(Mensagem mensagem, Usuario Usuario) throws ClassNotFoundException, SQLException {
+    public void inserirMensagem(Mensagem msg, Usuario Usuario) throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
             pst = conexao.prepareCall("INSERT INTO mensagem (id, msg, remetente)"
                     + "values (null,?,?)");
-            pst.setString(1, mensagem.getMensagem());
+            pst.setString(1, msg.getMensagem());
             pst.setString(2, Usuario.getApelido());
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,7 +144,7 @@ public class MetodosDAO {
         return null;
     }
 
-    public List<Mensagem> listarMensagens(Mensagem mensagem) throws ClassNotFoundException, SQLException {
+    public List<Mensagem> listarMensagens(Mensagem msg) throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
@@ -154,9 +152,9 @@ public class MetodosDAO {
             ResultSet rs = pst.executeQuery();
             List<Mensagem> lista = new ArrayList<>();
             while (rs.next()) {
-            mensagem.setMensagem(rs.getString("mensagem"));
-            mensagem.setRemetente(rs.getString("remetente"));
-            lista.add(mensagem);
+            msg.setMensagem(rs.getString("mensagem"));
+            msg.setRemetente(rs.getString("remetente"));
+            lista.add(msg);
             return lista;
             }
         } catch (SQLException ex) {
@@ -170,7 +168,7 @@ public class MetodosDAO {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            pst = conexao.prepareCall("DELETE FROM patrimonio WHERE codigo=?;");
+            pst = conexao.prepareCall("DELETE FROM usuario WHERE codigo=?;");
             pst.setInt(1, Usuario.getCodigo());
             pst.execute();
         } catch (SQLException ex) {
@@ -182,7 +180,7 @@ public class MetodosDAO {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            pst = conexao.prepareCall("UPDATE patrimonio set nome=?, sobrenome=?, email=?, apelido=? senha=? "
+            pst = conexao.prepareCall("UPDATE usuario set nome=?, sobrenome=?, email=?, apelido=? senha=? "
                     + "where codigo=?");
             pst.setInt(6, Usuario.getCodigo());
         } catch (SQLException ex) {

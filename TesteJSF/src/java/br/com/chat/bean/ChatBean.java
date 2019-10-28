@@ -7,8 +7,8 @@ package br.com.chat.bean;
 
 import br.com.chat.DAO.MetodosDAO;
 import br.com.chat.entidade.Login;
+import br.com.chat.entidade.Mensagem;
 import br.com.chat.entidade.Usuario;
-import com.sun.xml.ws.client.RequestContext;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-
-
 /**
  *
  * @author Gabriel
@@ -31,16 +29,16 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class ChatBean {
     
-    private Usuario usuario = new Usuario();//objeto que herda os metodos get e set da classe Mensagem
-    private MetodosDAO mtd_dao = new MetodosDAO();//objeto que herda os metodos inserir deletar e listar e excluir da 
-    //da classe MensagemDAO
+    private Usuario usuario = new Usuario();
+    private Mensagem msg = new Mensagem();
+    private MetodosDAO mtd_dao = new MetodosDAO();
     private Login lg = new Login();
     
     private List<Usuario> lista = new ArrayList<>();
+    private List<Mensagem> listam = new ArrayList<>();
     
     public void cadastrar() throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
-        // getMsg_dao().inserir(getMensagem());//executando o metodo inserir da classe DAO
-        // setMensagem(new Mensagem());//passando o objeto mensagem para limpar a memoria
+      
         Integer res;
         Integer ress;
         ress = new MetodosDAO().validarEmail(usuario);
@@ -48,12 +46,23 @@ public class ChatBean {
 
         new MetodosDAO().inserir(usuario);
         
-
+    }
+    
+    public void inserirMensagem() throws ClassNotFoundException, SQLException {
+        new MetodosDAO().inserirMensagem(msg, usuario);
     }
     
     public void listar() throws ClassCastException, SQLException {
         try {
             lista = mtd_dao.listarUsuario(usuario);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+        public void listarMensagens() throws ClassCastException, SQLException {
+        try {
+            listam = mtd_dao.listarMensagens(msg);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -85,8 +94,6 @@ public class ChatBean {
         this.lg = lg;
     }
     
-    
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -95,6 +102,14 @@ public class ChatBean {
         this.usuario = usuario;
     }
 
+    public Mensagem getMensagem() {
+        return msg;
+    }
+
+    public void setMensagem(Mensagem msg) {
+        this.msg = msg;
+    }
+    
     public MetodosDAO getMtd_dao() {
         return mtd_dao;
     }
@@ -110,6 +125,5 @@ public class ChatBean {
     public void setLista(List<Usuario> listamsg) {
         this.lista = listamsg;
     }
-    
     
 }

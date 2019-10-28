@@ -29,9 +29,9 @@
                 <center>
                 <img src="img/divisor3.png" height="1px" width="100px"></img>
                 </center>
-                <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value=""></h:inputText>
+                <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value="#{chatBean.mensagem.mensagem}"></h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
-                <h:commandButton id="enviar" value="Enviar" class="btn btn-dark" action="a"></h:commandButton>
+                <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark"></h:commandButton>
             </center>
         </h:form>
     </h:body>
