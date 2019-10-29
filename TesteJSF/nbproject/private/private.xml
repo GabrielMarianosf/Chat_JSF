@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSFF/TesteJSF/src/java/br/com/chat/DAO/MetodosDAO.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSFF/TesteJSF/web/index.xhtml</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSFF/TesteJSF/src/java/br/com/chat/entidade/Login.java</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSFF/TesteJSF/src/java/br/com/chat/bean/ChatBean.java</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSF/TesteJSF/web/perfil.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSF/TesteJSF/src/java/br/com/chat/DAO/MetodosDAO.java</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/Chat_JSF/TesteJSF/src/java/br/com/chat/bean/ChatBean.java</file>
         </group>
     </open-files>
 </project-private>
