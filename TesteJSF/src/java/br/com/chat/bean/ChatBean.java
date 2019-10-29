@@ -80,14 +80,15 @@ public class ChatBean implements Serializable {
                 list = mtd_dao.getCod(lg);
                 Usuario us = list.get(0);
                 up.setCodigo(us.getCodigo());
-                Sessao.setSessao("idusuario",up.getCodigo());
                 lista  = mtd_dao.listarUsuario(up);
                 Usuario res = lista.get(0);
                 up.setNome (res.getNome());
                 up.setSobrenome (res.getSobrenome());
                 up.setEmail (res.getEmail());
                 up.setApelido (res.getApelido());
+                Sessao.setSessao("idusuario",up);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+                System.out.println("Login efetuado com sucesso !");
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou Senha inválidos !", "erro de login");

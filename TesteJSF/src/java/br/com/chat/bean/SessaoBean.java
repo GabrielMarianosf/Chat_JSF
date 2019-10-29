@@ -8,6 +8,7 @@ package br.com.chat.bean;
 import br.com.chat.entidade.Usuario;
 import br.com.chat.util.Sessao;
 import java.io.IOException;
+import java.util.List;
 import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,36 +21,32 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @SessionScoped
+
 public class SessaoBean {
-
-    private Integer id;
+    private Usuario id = null;
+    private int a = 0;
     
-
-     public void valSessao() throws IOException {
-      if (id == null) {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-        } 
-        else{
-        FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
-        }   
-}   
+    public void init() {
+        a = 1;
+    }
     
-    
-    
-    
-    
-    
-    public void iniciar() throws Exception{
-        id = (Integer) Sessao.getSessao("id");
-        System.out.println("Sessao :"+id);
-        //valSessao();
+    public void temSessao() throws IOException {
+        Integer r = id.getCodigo();
+        if (r == null) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        }
+    }
+    public void iniciar() throws Exception {
+        id = (Usuario) Sessao.getSessao("idusuario");
     }
 
-    public Integer getUs() {
+    public Usuario getId() {
         return id;
     }
 
-    public void setUs(Integer us) {
+    public void setId(Usuario id) {
         this.id = id;
     }
 }
