@@ -72,19 +72,17 @@ public class ChatBean {
             boolean r;
             r = mtd_dao.Logar(lg);
             if (r) {
-                List<Usuario> list = new ArrayList<>();
+                List<Usuario> list;
                 list = mtd_dao.getCod(lg);
                 Usuario us = list.get(0);
                 up.setCodigo(us.getCodigo());
-                
-                lista = mtd_dao.listarUsuario(up);
+                Sessao.setSessao("idusuario",up.getCodigo());
+                lista  = mtd_dao.listarUsuario(up);
                 Usuario res = lista.get(0);
-                up.setNome(res.getNome());
-                up.setSobrenome(res.getSobrenome());
-                up.setEmail(res.getEmail());
-                up.setApelido(res.getApelido());
-                Sessao.setSessao("usuario",up);
-                
+                up.setNome (res.getNome());
+                up.setSobrenome (res.getSobrenome());
+                up.setEmail (res.getEmail());
+                up.setApelido (res.getApelido());
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
