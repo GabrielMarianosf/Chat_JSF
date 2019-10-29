@@ -9,6 +9,8 @@ import br.com.chat.DAO.MetodosDAO;
 import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Mensagem;
 import br.com.chat.entidade.Usuario;
+import br.com.chat.util.Sessao;
+import com.sun.faces.context.ApplicationMap;
 import com.sun.xml.ws.client.RequestContext;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
@@ -81,6 +83,7 @@ public class ChatBean {
                 up.setSobrenome(res.getSobrenome());
                 up.setEmail(res.getEmail());
                 up.setApelido(res.getApelido());
+                Sessao.setSessao("usuario",up);
                 
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
             } else {

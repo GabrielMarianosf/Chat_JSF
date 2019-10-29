@@ -1,16 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <f:metadata>
+            <f:viewAction action="#{sessaoBean.iniciar()}"/>
+        </f:metadata>
         <title>Perfil | Jump of The Ch@t</title>
-    <link rel="icon" href="img/icone.png"></link>
+        <link rel="icon" href="img/icone.png"></link>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
+        <h:outputStylesheet library="default" name="CSS/stilo.css"/>
         <h:form id="perfil">
-            <body background="img/background.jpg"></body>
             <div bgcolor="black" width="1800px" align="center" style="background:black;color:white;">
                 <img src="img/icone.png" size="50"></img>
                 <img src="img/divisor.png" width="525px"></img>
@@ -21,27 +25,18 @@
             <br></br>
             <br></br>
             <center>
-            <img src="img/temp.jpg" class="btn btn-outline-dark" height="250px" width="250px"></img>
+                <img src="img/temp.jpg" class="btn btn-outline-dark" height="250px" width="250px"></img>
                 <br></br>
                 <br></br>
-
-                <h:outputLabel>Nome: </h:outputLabel> 
-                <h:outputLabel>#{chatBean.usuario.nome}</h:outputLabel>
-                    
-                <br/>
+                <p>
+                    <strong>Bem Vindo(a)</strong> ' #{sessaoBean.us.nome} #{chatBean.up.sobrenome} ',<br/> <strong> Na sala de chat seu apelido será</strong> ' #{chatBean.up.apelido} '
+                    <br/><strong>Seu e-mail Cadastrado é o </strong> ' #{chatBean.up.email} ' <br/><br/><br/><strong>Deseja alterar seus dados ?</strong>
+                </p>
                 <img src="img/divisor2.png" width="2px"></img>
-                <h:outputLabel>Sobrenome: </h:outputLabel>
-                <br></br>
-            <h:outputLabel>Usuário: </h:outputLabel>
-            <br></br>
-            <h:outputLabel>Email: </h:outputLabel>
-            <br></br>
-            <br></br>
-                
-            <a href="alterar.xhtml" class="btn btn-secondary">Editar Perfil</a>
-            <img src="img/divisor2.png" width="2px"></img>
-            <h:commandButton type="button" value="Excluir Perfil" class="btn btn-danger"></h:commandButton>
-    </center>
+                <a href="alterar.xhtml" class="btn btn-secondary">Editar Perfil</a>
+                <img src="img/divisor2.png" width="2px"></img>
+                <h:commandButton type="button" value="Excluir Perfil" class="btn btn-danger"></h:commandButton>
+            </center>
         </h:form>
     </h:body>
 </html>
