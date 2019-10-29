@@ -180,10 +180,10 @@ public class MetodosDAO {
             ResultSet rs = pst.executeQuery();
             List<Mensagem> lista = new ArrayList<>();
             while (rs.next()) {
-            msg.setMensagem(rs.getString("mensagem"));
-            msg.setRemetente(rs.getString("remetente"));
-            lista.add(msg);
-            return lista;
+                msg.setMensagem(rs.getString("mensagem"));
+                msg.setRemetente(rs.getString("remetente"));
+                lista.add(msg);
+                return lista;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
