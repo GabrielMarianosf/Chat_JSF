@@ -48,10 +48,23 @@ public class ChatBean implements Serializable {
         boolean res = new MetodosDAO().validarApelido(usuario);
         boolean ress = new MetodosDAO().validarEmail(usuario);
         
-        if(res == false && ress == false){
-        new MetodosDAO().inserir(usuario);
+        if(res == false ){
+        if( ress == false){
+            new MetodosDAO().inserir(usuario);
+        }
+        else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Email já Cadastrados ! Altere seu e-mail", "erro no cadastrar e-mail");
+            context.addMessage(null, message);
+            context.validationFailed();
+            System.out.println("Email já Cadastrados!");
+        }
         }else{
-            System.out.println("Apelido ou Email já Cadastrados!");
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido já Cadastrados ! Altere seu apelido ", "erro no cadastrar apelido");
+            context.addMessage(null, message);
+            context.validationFailed();
+            System.out.println("Apelido já Cadastrados!");
         }
     }
     
