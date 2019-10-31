@@ -12,6 +12,7 @@ import br.com.chat.entidade.Usuario;
 import br.com.chat.util.Sessao;
 import com.sun.faces.context.ApplicationMap;
 import com.sun.xml.ws.client.RequestContext;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class ChatBean {
+public class ChatBean implements Serializable {
 
     private Usuario usuario = new Usuario();
     private Usuario up = new Usuario();
@@ -42,13 +43,16 @@ public class ChatBean {
     private List<Usuario> lista = new ArrayList<>();
     private List<Mensagem> listam = new ArrayList<>();
 
-    public void cadastrar() throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+    public void cadastrar() throws Exception {
         
-        Integer res;
-        Integer ress;
-        ress = new MetodosDAO().validarEmail(usuario);
-        res = new MetodosDAO().validarApelido(usuario);
+        boolean res = new MetodosDAO().validarApelido(usuario);
+        boolean ress = new MetodosDAO().validarEmail(usuario);
+        
+        if(res == false && ress == false){
         new MetodosDAO().inserir(usuario);
+        }else{
+            System.out.println("Apelido ou Email já Cadastrados!");
+        }
     }
     
     public void inserirMensagem() throws ClassNotFoundException, SQLException {

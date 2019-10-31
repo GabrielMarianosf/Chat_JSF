@@ -47,41 +47,36 @@ public class MetodosDAO {
         }
     }
 
-    public Integer validarApelido(Usuario user) throws SQLException, ClassNotFoundException {
+    public boolean validarApelido(Usuario user) throws Exception {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-
-            pst = conexao.prepareCall("select apelido from usuarios where apelido=?");
+            pst = conexao.prepareCall("select COUNT(*) AS res from usuarios where apelido = ?");
             pst.setString(1, user.getApelido());
-            ResultSet r = pst.executeQuery();
-            Conexao.fecharConexao();
-            if (r.next()) {
-                return 1;
-            } else {
-                return 0;
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+            return rs.getBoolean("res");
             }
-        } catch (ClassNotFoundException | SQLException exception) {
-            return 0;
+        } catch (Exception e) {
+            System.out.println("Apelido já cadastrado, " + e.getMessage());
         }
+        return false;
     }
 
-    public Integer validarEmail(Usuario user) throws SQLException, ClassNotFoundException {
+    public boolean validarEmail(Usuario user) throws Exception {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-
-            pst = conexao.prepareCall("select email from usuarios where email=?");
+            pst = conexao.prepareCall("select COUNT(*) AS res from usuarios where email = ?");
             pst.setString(1, user.getEmail());
             ResultSet rs = pst.executeQuery();
-            Conexao.fecharConexao();
-            if (rs == null) {
-                return 1;
+            while(rs.next()){
+            return rs.getBoolean("res");
             }
-            return 0;
-        } catch (ClassNotFoundException | SQLException e) {
-            return 0;
+        } catch (Exception e) {
+            System.out.println("Email já cadastrado, " + e.getMessage());
         }
+        return false;
     }
 
     public boolean Logar(Login log) throws Exception {
