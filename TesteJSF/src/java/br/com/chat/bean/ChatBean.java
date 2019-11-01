@@ -34,6 +34,7 @@ public class ChatBean implements Serializable {
 
     private Usuario usuario = new Usuario();
     private Usuario up = new Usuario();
+    private Usuario uf= new Usuario();
     private Mensagem msg = new Mensagem();
     private Mensagem lista_msg = new Mensagem();
     private MetodosDAO mtd_dao = new MetodosDAO();
@@ -74,7 +75,7 @@ public class ChatBean implements Serializable {
     }
     
     public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException {
-        new MetodosDAO().atualizarUsuario(usuario);
+        new MetodosDAO().atualizarUsuario(usuario, uf);
         FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
     }
     
