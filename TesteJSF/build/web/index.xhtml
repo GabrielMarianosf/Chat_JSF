@@ -11,71 +11,70 @@
     </h:head>
     <h:body>        
         <h:outputStylesheet library="default" name="CSS/stilo.css"/>
-            <div bgcolor="black" width="100%" align="center" style="background:black;color:white;">
-                <h:form id="login">
+        <div bgcolor="black" width="100%" align="center" style="background:black;color:white;">
+            <h:form id="login">
                 <img src="img/icone.png" size="50"></img>
                 <img src="img/divisor.png" width="630px"></img>
                 <span class="badge badge-secondary">Já possui uma conta?</span>
                 <img src="img/divisor.png" width="10px"></img>
                 <h:inputText id="emaillogin" class="btn btn-light" value="#{chatBean.lg.email}" required="true">
-                <f:passThroughAttribute name="placeholder" value="Email" />
+                    <f:passThroughAttribute name="placeholder" value="Email" />
                 </h:inputText>
                 <img src="img/divisor.png" width="5px"></img>
                 <h:inputSecret id="senhalogin" class="btn btn-light" value="#{chatBean.lg.senha}" required="true">
-                <f:passThroughAttribute name="placeholder" value="Senha" />
+                    <f:passThroughAttribute name="placeholder" value="Senha" />
                 </h:inputSecret>
                 <img src="img/divisor.png" width="5px"></img>
                 <h:commandButton id="login" value="Entrar" class="btn btn-secondary" action="#{chatBean.validarLogar()}">
                 </h:commandButton>
-                </h:form>
-            </div>    
+            </h:form>
+        </div>    
         <center>
             <br></br>
-        <h:messages class="badge badge-secondary"/>
+            <h:messages class="badge badge-secondary"/>
         </center>
-            <div class="form-wrapper">
+        <div class="form-wrapper">
             <h:form id="cadastro">
-            <center>
-                <br></br>
-                <img src="img/logo_index.png"></img>
-                <br></br>
-                <br></br>
-                <h3>Crie uma Conta!</h3>
-                É gratuito e sempre será... talvez.
-                <br></br>
-                <br></br>
-                <h:inputText id="nome" class="btn btn-outline-secondary" value="#{chatBean.usuario.nome}"  required="true">
-                    <f:passThroughAttribute name="placeholder" value="Nome" />
-                </h:inputText>
-                <img src="img/divisor3.png" width="2px"></img>
-                <h:inputText id="sobrenome" class="btn btn-outline-secondary" value="#{chatBean.usuario.sobrenome}" required="true">
-                    <f:passThroughAttribute name="placeholder" value="Sobrenome" />
-                </h:inputText>
-                <br></br>
-                <br></br>
-                <h:inputSecret id="senha" class="btn btn-outline-secondary" value="#{chatBean.usuario.senha}" required="true">
-                    <f:passThroughAttribute name="placeholder" value="Senha" />
-                </h:inputSecret>
-                <img src="img/divisor3.png" width="2px"></img>
-                <h:inputText id="apelido" class="btn btn-outline-secondary" value="#{chatBean.usuario.apelido}" required="true">
-                    <f:passThroughAttribute name="placeholder" value="Apelido" />
-                </h:inputText>
-                <br></br>
-                <br></br>
-                <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}" required="true">
-                    <f:passThroughAttribute name="placeholder" value="Email" />
-                </h:inputText>
-                <br></br>
-                <br></br>
-                <h:commandButton id="cadastra" type="submit" value="Pronto!" styleClass="btn btn-dark" action="#{chatBean.cadastrar()}">
-                    
-                </h:commandButton>
-                <img src="img/divisor2.png" width="8px"></img>
-                <h:commandButton id="limpar" type="reset" value="Limpar" class="btn btn-dark"></h:commandButton>
-            </center>
-        </h:form>
+                <center>
+                    <br></br>
+                    <img src="img/logo_index.png"></img>
+                    <br></br>
+                    <br></br>
+                    <h3>Crie uma Conta!</h3>
+                    É gratuito e sempre será... talvez.
+                    <br></br>
+                    <br></br>
+                    <h:inputText id="nome" class="btn btn-outline-secondary" value="#{chatBean.usuario.nome}"  required="true">
+                        <f:passThroughAttribute name="placeholder" value="Nome" />
+                    </h:inputText>
+                    <img src="img/divisor3.png" width="2px"></img>
+                    <h:inputText id="sobrenome" class="btn btn-outline-secondary" value="#{chatBean.usuario.sobrenome}" required="true">
+                        <f:passThroughAttribute name="placeholder" value="Sobrenome" />
+                    </h:inputText>
+                    <br></br>
+                    <br></br>
+                    <h:inputSecret id="senha" class="btn btn-outline-secondary" value="#{chatBean.usuario.senha}" required="true">
+                        <f:passThroughAttribute name="placeholder" value="Senha" />
+                    </h:inputSecret>
+                    <img src="img/divisor3.png" width="2px"></img>
+                    <h:inputText id="apelido" class="btn btn-outline-secondary" value="#{chatBean.usuario.apelido}" required="true">
+                        <f:passThroughAttribute name="placeholder" value="Apelido" />
+                    </h:inputText>
+                    <br></br>
+                    <br></br>
+                    <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}" required="true" validatorMessage="O email digitado é inválido">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        <f:passThroughAttribute name="placeholder" value="Email" />
+                    </h:inputText>
+                    <br></br>
+                    <br></br>
+                    <h:commandButton id="cadastra" type="submit" value="Pronto!" styleClass="btn btn-dark" action="#{chatBean.cadastrar()}">
+                    </h:commandButton>
+                    <img src="img/divisor2.png" width="8px"></img>
+                    <h:commandButton id="limpar" type="reset" value="Limpar" class="btn btn-dark"></h:commandButton>
+                </center>
+            </h:form>
         </div>
-        <h:outputScript name="jsf.js" library="javax.faces"/>
     </h:body>
 </html>
 

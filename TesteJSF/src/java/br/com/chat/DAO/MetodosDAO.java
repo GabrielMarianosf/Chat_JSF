@@ -93,7 +93,7 @@ public class MetodosDAO {
                 return rs.getBoolean("res");
             }
         } catch (ClassNotFoundException | NoSuchAlgorithmException | SQLException e) {
-            System.out.println("erro login");
+            System.out.println("Erro de login.");
         } finally {
             Conexao.fecharConexao();
         }
@@ -106,12 +106,10 @@ public class MetodosDAO {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
             pst = conexao.prepareCall("select id from usuarios where email = ? and senha = ?");
-            
             pst.setString(1, log.getEmail());
             String res;
             res = Hash.EncriptarSHA(log.getSenha());
             pst.setString(2, res);
-            
             ResultSet rs = pst.executeQuery();
             List<Usuario> lista = new ArrayList<>();
             while (rs.next()) {
@@ -121,7 +119,7 @@ public class MetodosDAO {
             }
             return lista;
         } catch (ClassNotFoundException | NoSuchAlgorithmException | SQLException e) {
-            System.out.println("erro login");
+            System.out.println("Erro de login.");
         } finally {
             Conexao.fecharConexao();
         }
@@ -174,7 +172,6 @@ public class MetodosDAO {
             PreparedStatement pst = conexao.prepareCall("SELECT msg,remetente FROM mensagem");
             ResultSet rs = pst.executeQuery();
             List<Mensagem> lista = new ArrayList<>();
-            
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,26 +179,34 @@ public class MetodosDAO {
         return null;
     }
 
-    public void deletarUsuario(Usuario Usuario) throws ClassNotFoundException, SQLException {
+    public void deletarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            pst = conexao.prepareCall("DELETE FROM usuario WHERE codigo=?;");
-            pst.setInt(1, Usuario.getCodigo());
+            pst = conexao.prepareCall("DELETE FROM usuarios WHERE id=?");
+            pst.setInt(1, usuario.getCodigo());
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void atualizarUsuario(Usuario Usuario) throws ClassNotFoundException, SQLException {
+    public void atualizarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            pst = conexao.prepareCall("UPDATE usuario set nome=?, sobrenome=?, email=?, apelido=? senha=? "
-                    + "where codigo=?");
-            pst.setInt(6, Usuario.getCodigo());
+            pst = conexao.prepareCall("UPDATE usuarios set nome=?, sobrenome=?, email=?, apelido=? senha=? "
+                    + "where id=?");
+            pst.setString(1, usuario.getNome());
+            pst.setString(2, usuario.getSobrenome());
+            String res;
+            res = Hash.EncriptarSHA(usuario.getSenha());
+            pst.setString(3, res);
+            pst.setString(4, usuario.getApelido());
+            pst.setString(5, usuario.getEmail());
+            pst.setInt(6, usuario.getCodigo());
+            pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

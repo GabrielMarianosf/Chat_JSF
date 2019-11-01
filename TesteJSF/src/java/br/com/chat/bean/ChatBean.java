@@ -10,8 +10,7 @@ import br.com.chat.entidade.Login;
 import br.com.chat.entidade.Mensagem;
 import br.com.chat.entidade.Usuario;
 import br.com.chat.util.Sessao;
-import com.sun.faces.context.ApplicationMap;
-import com.sun.xml.ws.client.RequestContext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
@@ -55,24 +54,35 @@ public class ChatBean implements Serializable {
         }
         else{
             FacesContext context = FacesContext.getCurrentInstance();
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Email já Cadastrados ! Altere seu e-mail", "erro no cadastrar e-mail");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Email já cadastrado! Altere seu e-mail.", "Erro no cadastro de e-mail.");
             context.addMessage(null, message);
             context.validationFailed();
-            System.out.println("Email já Cadastrados! ou Invalido (example@example.com)");
+            System.out.println("Email já cadastrado ou inválido.");
         }
         }else{
             FacesContext context = FacesContext.getCurrentInstance();
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido já Cadastrados ! Altere seu apelido ", "erro no cadastrar apelido");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido já cadastrado! Altere seu apelido.", "Erro no cadastro de apelido.");
             context.addMessage(null, message);
             context.validationFailed();
-            System.out.println("Apelido já Cadastrados!");
+            System.out.println("Apelido já cadastrado.");
         }
     }
     
-    public void inserirMensagem() throws ClassNotFoundException, SQLException {
+    public void inserirMensagem() throws ClassNotFoundException, SQLException, IOException {
         new MetodosDAO().inserirMensagem(msg, up);
+        //FacesContext.getCurrentInstance().getExternalContext().redirect("sala.xhtml");
     }
-
+    
+    public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException {
+        new MetodosDAO().atualizarUsuario(usuario);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+    }
+    
+    public void excluirUsuario() throws ClassNotFoundException, SQLException, IOException {
+        new MetodosDAO().deletarUsuario(up);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+    }
+    
     public void listar() throws ClassCastException, SQLException, ClassNotFoundException {
         //lista = mtd_dao.listarUsuario();
     }
@@ -87,10 +97,6 @@ public class ChatBean implements Serializable {
                 lista_msg.setRemetente(r.getString("remetente"));
                 listam.add(lista_msg);
             }
-            
-            
-             
-            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -113,11 +119,11 @@ public class ChatBean implements Serializable {
                 up.setApelido (res.getApelido());
                 Sessao.setSessao("idusuario",up);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
-                System.out.println("Login efetuado com sucesso !");
+                System.out.println("Login efetuado com sucesso!");
                 listarMensagens();
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou Senha inválidos !", "erro de login");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", "Erro de login.");
                 context.addMessage(null, message);
                 context.validationFailed();
             }

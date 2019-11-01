@@ -25,15 +25,13 @@
             </div>
             <br></br>
         </h:form>
-                
         <h:form id="mensagens">
-                <center>
-                    <div id="caixa">
-                        <h:outputText value="#{chatBean.lista_msg.remetente}"/>
-                        <h:outputText value="#{chatBean.lista_msg.mensagem}"/>
-                    </div>
-                
-                <br/><br/><br/>
+            <center>
+                <div id="caixa">
+                    <h:outputText value="#{chatBean.lista_msg.remetente}" class="badge badge-dark"/>
+                    <h:outputText value="#{chatBean.lista_msg.mensagem}" class="badge btn-secondary"/>
+                </div>
+                <br></br><br></br>
                 <img src="img/divisor3.png" height="1px" width="100px"></img>
                 <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value="#{chatBean.mensagem.mensagem}"></h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
@@ -44,14 +42,12 @@
         </h:form>
         <script>
             $(document).ready(
-            function() {
-                setInterval(function() {
-                    $('#caixa').text("#{chatBean.listarMensagens()}");
-                }, 1000);
-            });
+                    function () {
+                        setInterval(function () {
+                            $('#caixa').text("#{chatBean.listarMensagens()}");
+                        }, 1000);
+                    });
         </script>
-            
-            
     </h:body>
 </html>
 

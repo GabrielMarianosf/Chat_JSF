@@ -4,12 +4,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Editar Perfil | Jump of The Ch@t</title>
-    <link rel="icon" href="img/icone.png"></link>
+        <link rel="icon" href="img/icone.png"></link>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
-        <h:form id="alterar">
+        <h:form id="alterar" enctype="multipart/form-data">
             <body background="img/background.jpg"></body>
             <div bgcolor="black" width="1800px" align="center" style="background:black;color:white;">
                 <img src="img/icone.png" size="50"></img>
@@ -20,27 +20,26 @@
             </div>
             <center>
                 <br></br>
-            <img src="img/temp.jpg" class="btn btn-outline-dark" height="250px" width="250px"></img>
+                <img src="img/temp.jpg" class="btn btn-outline-dark" height="250px" width="250px"></img>
                 <br></br>
                 <br></br>
-                <h:inputFile id="foto"></h:inputFile>
                 <br></br>
                 <br></br>
-                Nome: <h:inputText id="nomealterar" class="btn btn-outline-secondary" value="Nome no Banco"></h:inputText>
-                Sobrenome: <h:inputText id="sobrenomealterar" class="btn btn-outline-secondary" value="Sobrenome no Banco"></h:inputText>
+                Nome: <h:inputText id="nomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.nome}"></h:inputText>
+                Sobrenome: <h:inputText id="sobrenomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.sobrenome}"></h:inputText>
                 <br></br>
                 <br></br>
-                Email: <h:inputText id="emailalterar" class="btn btn-outline-secondary" value="Email no Banco"></h:inputText>
-                Nickname: <h:inputText id="usuarioalterar" class="btn btn-outline-secondary" value="Usuário no Banco"></h:inputText>
+                Email: <h:inputText id="emailalterar" class="btn btn-outline-secondary" value="#{chatBean.up.email}"></h:inputText>
+                Nickname: <h:inputText id="usuarioalterar" class="btn btn-outline-secondary" value="#{chatBean.up.apelido}"></h:inputText>
                 <br></br>
                 <br></br>
-                Senha: <h:inputSecret id="senhaalterar" class="btn btn-outline-secondary"></h:inputSecret>
+                Senha: <h:inputSecret id="senhaalterar" class="btn btn-outline-secondary" value="#{chatBean.up.senha}"></h:inputSecret>
                 <br></br>
                 <br></br>
-                <h:commandButton type="submit" value="Pronto!" class="btn btn-secondary"></h:commandButton>
-            <a href="perfil.xhtml" class="btn btn-dark">Cancelar</a>
-            <br></br>
-            <br></br>
+                <h:commandButton type="submit" value="Pronto!" class="btn btn-secondary" action="#{chatBean.updateUsuario()}"></h:commandButton>
+                <a href="perfil.xhtml" class="btn btn-dark">Cancelar</a>
+                <br></br>
+                <br></br>
             </center>
         </h:form>
     </h:body>
