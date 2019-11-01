@@ -192,12 +192,13 @@ public class MetodosDAO {
         }
     }
 
-    public void atualizarUsuario(Usuario usuario, Usuario uf) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+    public void atualizarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
             pst = conexao.prepareCall("UPDATE usuarios set nome=?, sobrenome=?, email=?, apelido=? senha=? "
                     + "where id=?");
+            Usuario uf = new Usuario();
             pst.setString(1, uf.getNome());
             pst.setString(2, uf.getSobrenome());
             String res;

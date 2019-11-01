@@ -75,7 +75,7 @@ public class ChatBean implements Serializable {
     }
     
     public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException {
-        new MetodosDAO().atualizarUsuario(usuario, uf);
+        new MetodosDAO().atualizarUsuario(usuario);
         FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
     }
     
