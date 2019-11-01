@@ -36,6 +36,7 @@ public class ChatBean implements Serializable {
     private Usuario usuario = new Usuario();
     private Usuario up = new Usuario();
     private Mensagem msg = new Mensagem();
+    private Mensagem lista_msg = new Mensagem();
     private MetodosDAO mtd_dao = new MetodosDAO();
 
     private Login lg = new Login();
@@ -57,7 +58,7 @@ public class ChatBean implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Email já Cadastrados ! Altere seu e-mail", "erro no cadastrar e-mail");
             context.addMessage(null, message);
             context.validationFailed();
-            System.out.println("Email já Cadastrados!");
+            System.out.println("Email já Cadastrados! ou Invalido (example@example.com)");
         }
         }else{
             FacesContext context = FacesContext.getCurrentInstance();
@@ -69,7 +70,7 @@ public class ChatBean implements Serializable {
     }
     
     public void inserirMensagem() throws ClassNotFoundException, SQLException {
-        new MetodosDAO().inserirMensagem(msg, usuario);
+        new MetodosDAO().inserirMensagem(msg, up);
     }
 
     public void listar() throws ClassCastException, SQLException, ClassNotFoundException {
@@ -78,7 +79,18 @@ public class ChatBean implements Serializable {
 
     public void listarMensagens() throws ClassCastException, SQLException {
         try {
-            listam = mtd_dao.listarMensagens(msg);
+             ResultSet r;
+             r = mtd_dao.listarMensagens();
+             while (r.next()) {
+                
+                lista_msg.setMensagem(r.getString("msg"));
+                lista_msg.setRemetente(r.getString("remetente"));
+                listam.add(lista_msg);
+            }
+            
+            
+             
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -102,6 +114,7 @@ public class ChatBean implements Serializable {
                 Sessao.setSessao("idusuario",up);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
                 System.out.println("Login efetuado com sucesso !");
+                listarMensagens();
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou Senha inválidos !", "erro de login");
@@ -168,5 +181,14 @@ public class ChatBean implements Serializable {
     public void setListam(List<Mensagem> listamsg) {
         this.listam = listamsg;
     }
+
+    public Mensagem getLista_msg() {
+        return lista_msg;
+    }
+
+    public void setLista_msg(Mensagem lista_msg) {
+        this.lista_msg = lista_msg;
+    }
+    
 
 }

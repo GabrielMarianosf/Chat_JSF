@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <h:outputStylesheet library="default" name="CSS/stilo.css"/>
         <title>Sala de Chat | Jump of The Ch@t</title>
         <link rel="icon" href="img/icone.png"></link>
         <link rel="stylesheet" type="text/css" href="resources/default/CSS/stilo.css"></link>
@@ -23,18 +25,33 @@
             </div>
             <br></br>
         </h:form>
+                
         <h:form id="mensagens">
-            <center>
-                <div id="caixa" value="#{chatBean.listarMensagens()}">
-                </div>
                 <center>
+                    <div id="caixa">
+                        <h:outputText value="#{chatBean.lista_msg.remetente}"/>
+                        <h:outputText value="#{chatBean.lista_msg.mensagem}"/>
+                    </div>
+                
+                <br/><br/><br/>
                 <img src="img/divisor3.png" height="1px" width="100px"></img>
-                </center>
                 <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value="#{chatBean.mensagem.mensagem}"></h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
-                <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark"></h:commandButton>
+                <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark">
+                    <f:ajax execute="@all" render="@all"/>
+                </h:commandButton>
             </center>
         </h:form>
+        <script>
+            $(document).ready(
+            function() {
+                setInterval(function() {
+                    $('#caixa').text("#{chatBean.listarMensagens()}");
+                }, 1000);
+            });
+        </script>
+            
+            
     </h:body>
 </html>
 

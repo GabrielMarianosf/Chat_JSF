@@ -31,9 +31,11 @@ form {
     border-color: black;
     border-style: solid;
     border-radius: 10px;
-    display: inline-block
+    display: inline-block;
+    text-align: center;
 }
 
 body {
     background-image: url("../..//..//img/background.jpg");
 }
+
