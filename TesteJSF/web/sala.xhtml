@@ -17,7 +17,7 @@
             <body background="img/background.jpg"></body>
             <div bgcolor="black" width="1000px" align="center" height="10px" style="background:black;color:white;">
                 <img src="img/icone.png" size="50"></img>
-                <img src="img/divisor.png" width="800px"></img>
+                <img src="img/divisor.png" width="720px"></img>
                 <img src="img/divisor.png" width="300px"></img>
                 <h:commandButton id="perfil" value="Perfil" action="perfil.xhtml" class="btn btn-secondary"></h:commandButton>
                 <img src="img/divisor.png" width="2px"></img>
@@ -29,7 +29,8 @@
             <h:messages class="badge badge-secondary"/>
             <center>
                 <div id="caixa">
-                    <h:outputText value="#{chatBean.lista_msg.remetente}" class="badge badge-dark"/>
+                    <h:outputText value="#{chatBean.lista_msg.remetente} :" class="badge badge-dark"/>
+                    <img src="img/divisor3.png" width="1px"></img>
                     <h:outputText value="#{chatBean.lista_msg.mensagem}" class="badge btn-secondary"/>
                 </div>
                 <br></br><br></br>
