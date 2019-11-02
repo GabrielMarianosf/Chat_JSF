@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import static org.jboss.logging.NDC.clear;
 
 /**
  *
@@ -34,7 +35,6 @@ public class ChatBean implements Serializable {
 
     private Usuario usuario = new Usuario();
     private Usuario up = new Usuario();
-    private Usuario uf= new Usuario();
     private Mensagem msg = new Mensagem();
     private Mensagem lista_msg = new Mensagem();
     private MetodosDAO mtd_dao = new MetodosDAO();
@@ -74,9 +74,20 @@ public class ChatBean implements Serializable {
         //FacesContext.getCurrentInstance().getExternalContext().redirect("sala.xhtml");
     }
     
-    public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException {
-        new MetodosDAO().atualizarUsuario(usuario);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+    public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException, Exception {
+        System.out.println(up.getSenha());
+        boolean r = new MetodosDAO().validaSenha(up);
+        if(r){
+           new MetodosDAO().atualizarUsuario(up);
+           FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        }
+        else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Senha Inválida ! Digite sua senha Correta", "Erro no update user - senha errada!");
+            context.addMessage(null, message);
+            context.validationFailed();
+            System.out.println("Senha incorreta !");
+        }
     }
     
     public void excluirUsuario() throws ClassNotFoundException, SQLException, IOException {
@@ -84,9 +95,6 @@ public class ChatBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
     
-    public void listar() throws ClassCastException, SQLException, ClassNotFoundException {
-        //lista = mtd_dao.listarUsuario();
-    }
 
     public void listarMensagens() throws ClassCastException, SQLException {
         try {
@@ -118,10 +126,8 @@ public class ChatBean implements Serializable {
                 up.setSobrenome (res.getSobrenome());
                 up.setEmail (res.getEmail());
                 up.setApelido (res.getApelido());
-                Sessao.setSessao("idusuario",up);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
                 System.out.println("Login efetuado com sucesso!");
-                listarMensagens();
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", "Erro de login.");

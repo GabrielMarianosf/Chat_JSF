@@ -191,25 +191,43 @@ public class MetodosDAO {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void atualizarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+    
+    public boolean validaSenha(Usuario user) throws Exception {
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst;
-            pst = conexao.prepareCall("UPDATE usuarios set nome=?, sobrenome=?, email=?, apelido=? senha=? "
-                    + "where id=?");
-            Usuario uf = new Usuario();
+            pst = conexao.prepareCall("select COUNT(*) AS res from usuarios where email = ? and senha = ?");
+            pst.setString(1, user.getEmail());
+            String res;
+            res = Hash.EncriptarSHA(user.getSenha());
+            pst.setString(2, res);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getBoolean("res");
+            }
+        } catch (ClassNotFoundException | NoSuchAlgorithmException | SQLException e) {
+            System.out.println("Erro de senha");
+        } finally {
+            Conexao.fecharConexao();
+        }
+        return false;
+    }
+
+    public void atualizarUsuario(Usuario uf) throws ClassNotFoundException, SQLException {
+        try {
+            Connection conexao = (Connection) Conexao.getConexao();
+            PreparedStatement pst;
+            pst = conexao.prepareCall("UPDATE usuarios SET Nome = ?, Sobrenome = ?, Apelido = ?, email = ? WHERE id = ?");
             pst.setString(1, uf.getNome());
             pst.setString(2, uf.getSobrenome());
-            String res;
-            res = Hash.EncriptarSHA(uf.getSenha());
-            pst.setString(3, res);
-            pst.setString(4, uf.getApelido());
-            pst.setString(5, uf.getEmail());
-            pst.setInt(6, usuario.getCodigo());
+            pst.setString(3, uf.getApelido());
+            pst.setString(4, uf.getEmail());
+            pst.setInt(5, uf.getCodigo());
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            Conexao.fecharConexao();
         }
     }
 }

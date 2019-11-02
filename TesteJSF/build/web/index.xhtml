@@ -17,11 +17,11 @@
                 <img src="img/divisor.png" width="630px"></img>
                 <span class="badge badge-secondary">Já possui uma conta?</span>
                 <img src="img/divisor.png" width="10px"></img>
-                <h:inputText id="emaillogin" class="btn btn-light" value="#{chatBean.lg.email}" required="true">
+                <h:inputText id="emaillogin" class="btn btn-light" value="#{chatBean.lg.email}" required="true" validatorMessage="Email login: campo obrigatório.">
                     <f:passThroughAttribute name="placeholder" value="Email" />
                 </h:inputText>
                 <img src="img/divisor.png" width="5px"></img>
-                <h:inputSecret id="senhalogin" class="btn btn-light" value="#{chatBean.lg.senha}" required="true">
+                <h:inputSecret id="senhalogin" class="btn btn-light" value="#{chatBean.lg.senha}" required="true" validatorMessage="Senha Login: campo obrigatório.">
                     <f:passThroughAttribute name="placeholder" value="Senha" />
                 </h:inputSecret>
                 <img src="img/divisor.png" width="5px"></img>
@@ -44,25 +44,25 @@
                     É gratuito e sempre será... talvez.
                     <br></br>
                     <br></br>
-                    <h:inputText id="nome" class="btn btn-outline-secondary" value="#{chatBean.usuario.nome}"  required="true">
+                    <h:inputText id="nome" class="btn btn-outline-secondary" value="#{chatBean.usuario.nome}"  required="true" validatorMessage="Nome: campo obrigatório.">
                         <f:passThroughAttribute name="placeholder" value="Nome" />
                     </h:inputText>
                     <img src="img/divisor3.png" width="2px"></img>
-                    <h:inputText id="sobrenome" class="btn btn-outline-secondary" value="#{chatBean.usuario.sobrenome}" required="true">
+                    <h:inputText id="sobrenome" class="btn btn-outline-secondary" value="#{chatBean.usuario.sobrenome}" required="true" validatorMessage="Sobrenome: campo obrigatório.">
                         <f:passThroughAttribute name="placeholder" value="Sobrenome" />
                     </h:inputText>
                     <br></br>
                     <br></br>
-                    <h:inputSecret id="senha" class="btn btn-outline-secondary" value="#{chatBean.usuario.senha}" required="true">
+                    <h:inputSecret id="senha" class="btn btn-outline-secondary" value="#{chatBean.usuario.senha}" required="true" validatorMessage="Senha: campo obrigatório.">
                         <f:passThroughAttribute name="placeholder" value="Senha" />
                     </h:inputSecret>
                     <img src="img/divisor3.png" width="2px"></img>
-                    <h:inputText id="apelido" class="btn btn-outline-secondary" value="#{chatBean.usuario.apelido}" required="true">
+                    <h:inputText id="apelido" class="btn btn-outline-secondary" value="#{chatBean.usuario.apelido}" required="true" validatorMessage="Apelido: campo obrigatório.">
                         <f:passThroughAttribute name="placeholder" value="Apelido" />
                     </h:inputText>
                     <br></br>
                     <br></br>
-                    <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}" required="true" validatorMessage="O email digitado é inválido">
+                    <h:inputText id="email" size="45" styleClass="btn btn-outline-secondary" value="#{chatBean.usuario.email}" required="true" validatorMessage="O email digitado é inválido.">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                         <f:passThroughAttribute name="placeholder" value="Email" />
                     </h:inputText>
