@@ -15,7 +15,9 @@
                 <img src="img/icone.png" size="50"></img>
                 <img src="img/divisor.png" width="550px"></img>
                 <span class="badge badge-secondary">Edição de Perfil</span>
-                <img src="img/divisor.png" width="550px"></img>
+                <img src="img/divisor.png" width="400px"></img>
+                <h:commandButton id="sala" value="Sala de Chat" action="sala.xhtml" class="btn btn-secondary"></h:commandButton>
+                <img src="img/divisor.png" width="2px"></img>
                 <h:commandButton id="sair" value="Sair" class="btn btn-secondary"></h:commandButton>
             </div>
             <center>
@@ -25,19 +27,19 @@
                 <br></br>
                 <br></br>
                 <br></br>
-                Nome: <h:inputText id="nomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.nome}"></h:inputText>
-                Sobrenome: <h:inputText id="sobrenomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.sobrenome}"></h:inputText>
+                Nome: <h:inputText id="nomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.nome}" required="true" requiredMessage="Nome: Campo obrigatório."></h:inputText>
+                Sobrenome: <h:inputText id="sobrenomealterar" class="btn btn-outline-secondary" value="#{chatBean.up.sobrenome}" required="true" requiredMessage="Sobrenome: Campo obrigatório."></h:inputText>
                 <br></br>
                 <br></br>
-                Email: <h:inputText id="emailalterar" class="btn btn-outline-secondary" value="#{chatBean.up.email}"></h:inputText>
-                Nickname: <h:inputText id="usuarioalterar" class="btn btn-outline-secondary" value="#{chatBean.up.apelido}"></h:inputText>
+                Apelido: <h:inputText id="usuarioalterar" class="btn btn-outline-secondary" value="#{chatBean.up.apelido}" required="true" requiredMessage="Apelido: Campo obrigatório."></h:inputText>
+                Senha Atual: <h:inputSecret id="senhaalterar" class="btn btn-outline-secondary" value="#{chatBean.up.senha}" required="true" requiredMessage="Senha: Campo obrigatório."></h:inputSecret>
                 <br></br>
                 <br></br>
-                Senha: <h:inputSecret id="senhaalterar" class="btn btn-outline-secondary" value="#{chatBean.up.senha}"></h:inputSecret>
+                <h:messages class="badge badge-secondary"/>
                 <br></br>
                 <br></br>
                 <h:commandButton type="submit" value="Pronto!" class="btn btn-secondary" action="#{chatBean.updateUsuario()}"></h:commandButton>
-                <a href="perfil.xhtml" class="btn btn-dark">Cancelar</a>
+                <a href="perfil.xhtml" class="btn btn-dark">Voltar</a>
                 <br></br>
                 <br></br>
             </center>

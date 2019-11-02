@@ -38,7 +38,6 @@ public class ChatBean implements Serializable {
     private Mensagem msg = new Mensagem();
     private Mensagem lista_msg = new Mensagem();
     private MetodosDAO mtd_dao = new MetodosDAO();
-
     private Login lg = new Login();
 
     private List<Usuario> lista = new ArrayList<>();
@@ -69,7 +68,7 @@ public class ChatBean implements Serializable {
         }
     }
     
-    public void inserirMensagem() throws ClassNotFoundException, SQLException, IOException {
+        public void inserirMensagem() throws ClassNotFoundException, SQLException, IOException {
         new MetodosDAO().inserirMensagem(msg, up);
         //FacesContext.getCurrentInstance().getExternalContext().redirect("sala.xhtml");
     }
@@ -77,7 +76,7 @@ public class ChatBean implements Serializable {
     public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException, Exception {
         System.out.println(up.getSenha());
         boolean r = new MetodosDAO().validaSenha(up);
-        if(r){
+        if(r == true){
            new MetodosDAO().atualizarUsuario(up);
            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
         }
@@ -98,18 +97,12 @@ public class ChatBean implements Serializable {
 
     public void listarMensagens() throws ClassCastException, SQLException {
         try {
-             ResultSet r;
-             r = mtd_dao.listarMensagens();
-             while (r.next()) {
-                
-                lista_msg.setMensagem(r.getString("msg"));
-                lista_msg.setRemetente(r.getString("remetente"));
-                listam.add(lista_msg);
-            }
+             listam = mtd_dao.listarMensagens();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChatBean.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
+
     
     public void validarLogar() throws ClassNotFoundException, SQLException, Exception {
         try {

@@ -29,17 +29,23 @@
             <h:messages class="badge badge-secondary"/>
             <center>
                 <div id="caixa">
-                    <h:outputText value="#{chatBean.lista_msg.remetente} :" class="badge badge-dark"/>
-                    <img src="img/divisor3.png" width="1px"></img>
-                    <h:outputText value="#{chatBean.lista_msg.mensagem}" class="badge btn-secondary"/>
+                    <h:dataTable value="#{chatBean.listam}" var="lista">
+                        <h:column>
+                            <h:outputText value="#{lista.remetente} :" class="badge badge-dark"/>
+                        </h:column>
+                            <img src="img/divisor3.png" width="1px"></img>
+                            <h:column>
+                                <h:outputText value="#{lista.mensagem}" class="badge btn-secondary"/>
+                            </h:column>
+                    </h:dataTable>
                 </div>
                 <br></br><br></br>
                 <img src="img/divisor3.png" height="1px" width="100px"></img>
                 <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value="#{chatBean.mensagem.mensagem}" required="true" validatorMessage="Você não pode enviar uma mensagem vazia.">
                 </h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
-                <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark">
-                    <f:ajax execute="@all" render="@all"/>
+                <h:commandButton id="enviar"  value="Enviar" class="btn btn-dark">
+                    <f:ajax listener="#{chatBean.inserirMensagem()}" execute="@all" render="@all"/>
                 </h:commandButton>
             </center>
         </h:form>

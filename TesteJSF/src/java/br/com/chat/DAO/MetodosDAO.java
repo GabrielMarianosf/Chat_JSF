@@ -165,14 +165,20 @@ public class MetodosDAO {
         return null;
     }
 
-    public ResultSet listarMensagens() throws ClassNotFoundException, SQLException {
+    public List<Mensagem> listarMensagens() throws ClassNotFoundException, SQLException {
 
         try {
             Connection conexao = (Connection) Conexao.getConexao();
             PreparedStatement pst = conexao.prepareCall("SELECT msg,remetente FROM mensagem");
             ResultSet rs = pst.executeQuery();
             List<Mensagem> lista = new ArrayList<>();
-            return rs;
+            while (rs.next()) {
+                Mensagem ms = new Mensagem();
+                ms.setMensagem(rs.getString("msg"));
+                ms.setRemetente(rs.getString("remetente"));
+                lista.add(ms);
+            }
+            return lista;
         } catch (SQLException ex) {
             Logger.getLogger(MetodosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
