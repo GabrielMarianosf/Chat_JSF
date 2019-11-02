@@ -25,12 +25,15 @@
             </div>
             <br></br>
         </h:form>
+        <center>
+            
+        </center>
         <h:form id="mensagens">
             <h:messages class="badge badge-secondary"/>
             <center>
                 <div id="caixa">
                     <h:dataTable value="#{chatBean.listam}" var="lista">
-                        <h:column>
+                        <h:column >
                             <h:outputText value="#{lista.remetente} :" class="badge badge-dark"/>
                         </h:column>
                             <img src="img/divisor3.png" width="1px"></img>
@@ -44,8 +47,8 @@
                 <h:inputText id="mensagem" class="btn btn-outline-dark" size="100" value="#{chatBean.mensagem.mensagem}" required="true" validatorMessage="Você não pode enviar uma mensagem vazia.">
                 </h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
-                <h:commandButton id="enviar"  value="Enviar" class="btn btn-dark">
-                    <f:ajax listener="#{chatBean.inserirMensagem()}" execute="@all" render="@all" event="click"/>
+                <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark">
+                    <f:ajax execute="@form" render="lista"/>
                 </h:commandButton>
             </center>
         </h:form>

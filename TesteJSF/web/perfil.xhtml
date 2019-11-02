@@ -35,7 +35,7 @@
                 <img src="img/divisor2.png" width="2px"></img>
                 <a href="alterar.xhtml" class="btn btn-secondary">Editar Perfil</a>
                 <img src="img/divisor2.png" width="2px"></img>
-                <h:commandButton id="excluir" value="Excluir Perfil" class="btn btn-danger" action="#{chatBean.excluirUsuario()}"></h:commandButton>
+                <h:commandButton id="excluir" value="Excluir Perfil" onclick="return confirm('Tem certeza que deseja excluir ?')" class="btn btn-danger" action="#{chatBean.excluirUsuario()}"></h:commandButton>
             </center>
         </h:form>
     </h:body>
