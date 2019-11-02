@@ -70,7 +70,7 @@ public class ChatBean implements Serializable {
     
         public void inserirMensagem() throws ClassNotFoundException, SQLException, IOException {
         new MetodosDAO().inserirMensagem(msg, up);
-        //FacesContext.getCurrentInstance().getExternalContext().redirect("sala.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("sala.xhtml");
     }
     
     public void updateUsuario() throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException, Exception {

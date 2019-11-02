@@ -45,7 +45,7 @@
                 </h:inputText>
                 <img src="img/divisor3.png" width="2px"></img>
                 <h:commandButton id="enviar"  value="Enviar" class="btn btn-dark">
-                    <f:ajax listener="#{chatBean.inserirMensagem()}" execute="@all" render="@all"/>
+                    <f:ajax listener="#{chatBean.inserirMensagem()}" execute="@all" render="@all" event="click"/>
                 </h:commandButton>
             </center>
         </h:form>
@@ -54,7 +54,7 @@
                     function () {
                         setInterval(function () {
                             $('#caixa').text("#{chatBean.listarMensagens()}");
-                        }, 1000);
+                        }, 100);
                     });
         </script>
     </h:body>
