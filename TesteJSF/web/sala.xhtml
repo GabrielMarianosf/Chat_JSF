@@ -18,7 +18,9 @@
             <div bgcolor="black" width="1000px" align="center" height="10px" style="background:black;color:white;">
                 <img src="img/icone.png" size="50"></img>
                 <img src="img/divisor.png" width="720px"></img>
-                <img src="img/divisor.png" width="300px"></img>
+                <img src="img/divisor.png" width="170px"></img>
+                <h:commandButton id="enviar" value="↺" action="#{chatBean.listarMensagens()}" class="btn btn-secondary"></h:commandButton>
+                <img src="img/divisor.png" width="50px"></img>
                 <h:commandButton id="perfil" value="Perfil" action="perfil.xhtml" class="btn btn-secondary"></h:commandButton>
                 <img src="img/divisor.png" width="2px"></img>
                 <h:commandButton id="sair" value="Sair" class="btn btn-secondary" action="index.xhtml"></h:commandButton>
@@ -47,6 +49,11 @@
                 <h:commandButton id="enviar"  value="Enviar" action="#{chatBean.inserirMensagem()}" class="btn btn-dark">
                     <f:ajax execute="@form" render="lista"/>
                 </h:commandButton>
+            </center>
+        </h:form>
+        <h:form id="listar">
+            <center>
+                
             </center>
         </h:form>
     </h:body>
